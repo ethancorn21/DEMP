@@ -1,8 +1,8 @@
 #interacts with discord API to get/send messages
-
 import discord
 import os
 from dotenv import load_dotenv
+from message_operations import encapsulated_message
 
 load_dotenv()
 
@@ -13,7 +13,7 @@ client = discord.Client(intents = intents)
 
 @client.event
 async def on_message(message): 
-    if message.author.id == client.user.id:                     #bot does not reply to self
+    if message.author.id == client.user.id:      #bot does not reply to self
         return
 
     if message.content.startswith("!start"):
@@ -41,11 +41,11 @@ async def start_chat(message):
 async def send_chat(message):
     try:
         if message.author == user_2:
-            await dm_channel_1.send(message.content)
-            print(f"{message.author} : {message.content}")
+            await dm_channel_1.send(encapsulated_message(message))
+            print(f"{message.author} {message.created_at} : {message.content}")
         else:
-            await dm_channel_2.send(message.content)
-            print(f"{message.author} : {message.content}")
+            await dm_channel_2.send(encapsulated_message(message))
+            print(f"{message.author} {message.created_at} : {message.content}")
     except NameError:
         print("Please initiate in server first")
         await message.channel.send("Please initiate in server first")
