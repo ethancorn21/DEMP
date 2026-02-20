@@ -18,10 +18,14 @@ async def on_message(message):
 
     if message.content.startswith("!start"):
         await start_chat(message)
+    if message.channel.type == discord.ChannelType.private:
+        await send_chat(message)
 
 async def start_chat(message):
     await message.reply("starting chat...", mention_author = True)
 
+    global user_1
+    global user_2
     user_1 = await client.fetch_user(int(os.getenv("USER_ID_MAIN")))
     user_2 = message.author
 
@@ -30,20 +34,21 @@ async def start_chat(message):
     dm_channel_1 = await user_1.create_dm()
     dm_channel_2 = await user_2.create_dm()
 
-    await dm_channel_1.send(f"connected to {user_2}")
-    await dm_channel_2.send(f"connected to {user_1}")
+    await dm_channel_1.send(f"relaying to {user_2}")
+    await dm_channel_2.send(f"relaying to {user_1}")
+    print("connected...")
 
+async def send_chat(message):
+    try:
+        if message.author == user_2:
+            await dm_channel_1.send(message.content)
+            print(f"{message.author} : {message.content}")
+        else:
+            await dm_channel_2.send(message.content)
+            print(f"{message.author} : {message.content}")
+    except NameError:
+        print("Please initiate in server first")
+        await message.channel.send("Please initiate in server first")
 
-"""
-    if message.content.type == discord.ChannelType.private:
-        on_dm(message)
-
-async def on_dm(message):
-        if message.author.id == 
-        message.content
-"""
+    
 client.run(os.getenv("BOT_TOKEN"))
-
-# get user id
-# create dm channel
-# send message to that channel (message_operations will handle this)
