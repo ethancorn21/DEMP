@@ -1,3 +1,5 @@
 .env
 *.pem
 todo.txt
+__pycache__/
+.venv/
