@@ -1,4 +1,5 @@
 # D.E.M.P - Discord Encrypted Messaging Project
+Warning : **very** rough MVP
 
 DEMP was intended to be a personal project that used Discord as a underlay network
 for encrypted messages. This would have taken advantage of the consistent reliability
