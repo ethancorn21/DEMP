@@ -1,6 +1,8 @@
 # D.E.M.P - Discord Encrypted Messaging Project
 Warning : **very** rough MVP
 
+---
+
 DEMP was intended to be a personal project that used Discord as a underlay network
 for encrypted messages. This would have taken advantage of the consistent reliability
 and availability of Discords infrastructure paired with guaranteed E2EE by users
@@ -23,6 +25,8 @@ TCP/IP packets. The headers include data about what type of message was sent
 The project fell through when the E2EE model broke. Discord's API made it impossible
 for the bot to act as a "dumb" relay that was unaware of what it was forwarding
 and impossible for me to interact with the Discord client any other way.
+
+---
 
 ### What I learned
 
